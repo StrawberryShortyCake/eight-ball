@@ -1,4 +1,4 @@
-import EightBall from "./EightBall"
+import EightBall from "./EightBall";
 import './App.css';
 
 /** Component for entire page.
@@ -6,6 +6,7 @@ import './App.css';
  * Props: none
  * State: none
  *
+ * App -> EightBall
 */
 
 function App() {

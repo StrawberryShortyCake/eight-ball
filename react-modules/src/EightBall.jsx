@@ -1,15 +1,7 @@
-import {shuffle} from "lodash"
+import { useState } from "react";
+import {sample} from "lodash";
 import './EightBall.css';
-/**
- * Displays a colored circle with an answer
- *
- * Props: [{ msg: STRING, color: STRING },...]
- *
- * State: answer
- *      default to {msg: "Think of a Question.", color: "black" }
- *
- * App -> EightBall
- */
+
 
 const defaultAnswers = [
   { msg: "It is certain.", color: "green" },
@@ -34,24 +26,38 @@ const defaultAnswers = [
   { msg: "Very doubtful.", color: "red" },
 ]
 
+/**
+ * Displays a colored circle with an answer
+ *
+ * Props: {answers:[{ msg: STRING, color: STRING },...]}
+ *
+ * State: answer
+ *      default to {msg: "Think of a Question.", color: "black" }
+ *
+ * App -> EightBall
+ */
+
 function EightBall({answers=defaultAnswers}){
 
     const [answer, setAnswer] = useState({
-         msg: "Think of a Question.", color: "black" })
+         msg: "Think of a Question.", color: "black" });
 
     function handleClick(evt){
-        const shuffledArray = shuffle(answers)
-        setAnswer(shuffledArray[0])
-    }
+        const newAnswer = sample(answers);
+        setAnswer(newAnswer);
+    };
 
+    // NOTE: the div className is always the name of the component, everything else follows the component name
     return(
-        <div className="eight-ball" onClick={handleClick}
-            style={`background-color:${answer.color}`} >
-            <h3 className="ball-answer">
+        <div
+                className="EightBall"
+                onClick={handleClick}
+                style={{backgroundColor:answer.color}} >
+            <b className="EightBall-answer">
                 {answer.msg}
-            </h3>
+            </b>
         </div>
-    )
+    );
 }
 
 export default EightBall
